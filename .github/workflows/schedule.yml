@@ -32,6 +32,8 @@ jobs:
     #   run: |
     #     python sql-practice-arena/app.py 
 
-    - name: Check Files List
+    - name: Find My Files
       run: |
-        ls -R  # 👈 현재 폴더와 하위 폴더의 모든 파일을 화면에 출력하는 명령어
+        pwd
+        echo "--- 파일 목록 시작 ---"
+        ls -R
