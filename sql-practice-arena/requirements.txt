@@ -1,4 +1,4 @@
-streamlit
-pandas
-openpyxl
-sqlglot
+streamlit>=1.40.0
+pandas>=2.2.3
+openpyxl>=3.1.5
+sqlglot>=25.0.0
