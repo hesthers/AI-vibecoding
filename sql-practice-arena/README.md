@@ -27,8 +27,8 @@
 ## 🛠️ 기술 스택 (Tech Stack)
 - **Language**: Python 3.9+
 - **Frontend**: Streamlit
-- **Database**: SQLite3
-- **Libraries**: Pandas, sqlglot
+- **Database**: SQLite3, MySQL, Oracle, Bigquery, PostgreSQL..
+- **Libraries**: Pandas, sqlglot, ..
 
 ## 🚀 실행 방법 (How to Run)
 ```bash
