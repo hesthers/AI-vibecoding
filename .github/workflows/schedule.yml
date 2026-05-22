@@ -28,12 +28,12 @@ jobs:
         pip install requests
 
 
-    # - name: Run Python Script
-    #   run: |
-    #     python sql-practice-arena/app.py 
-
-    - name: Find My Files
+    - name: Run Python Script
       run: |
-        pwd
-        echo "--- 파일 목록 시작 ---"
-        ls -R
+        python sql-practice-arena/app.py 
+
+    # - name: Find My Files
+    #   run: |
+    #     pwd
+    #     echo "--- 파일 목록 시작 ---"
+    #     ls -R
