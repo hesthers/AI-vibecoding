@@ -41,5 +41,8 @@ streamlit run app.py
 
 ---
 
+<img width="2513" height="1211" alt="image" src="https://github.com/user-attachments/assets/fbab07fe-dc2d-40ad-851d-c5709e3e9be8" />
+
+
 Copyright (c) 2026 Hesthers. All rights reserved.
 This project is for portfolio purposes only. Unauthorized copying, modification, or commercial use is strictly prohibited. (이 프로젝트는 포트폴리오용입니다. 무단 복사, 수정 및 상업적 이용을 엄격히 금지합니다.)
