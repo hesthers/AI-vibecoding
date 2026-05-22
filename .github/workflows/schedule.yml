@@ -30,4 +30,4 @@ jobs:
 
     - name: Run Python Script
       run: |
-        python app.py 
+        python sql-practice-arena/app.py
