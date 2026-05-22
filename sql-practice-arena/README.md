@@ -40,7 +40,7 @@ streamlit run app.py
 ```
 
 ---
-
+- 현재 배포 주소: https://sql-practice-questions-bank.streamlit.app/
 <img width="2513" height="1211" alt="image" src="https://github.com/user-attachments/assets/fbab07fe-dc2d-40ad-851d-c5709e3e9be8" />
 
 
