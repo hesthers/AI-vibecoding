@@ -1,0 +1,99 @@
+# Tableau AI Dashboard Recommender - 입력 항목 샘플 모음
+
+앱 화면의 실제 입력 폼 형식에 맞춰 구성된 3가지 상황별 추천 샘플 데이터입니다. 화면에 보이는 각 칸에 그대로 복사하여 붙여넣으시면 됩니다.
+
+---
+
+## 샘플 1: 이커머스 세일즈 퍼포먼스 대시보드
+### 1. 대시보드 정보 입력
+* **대시보드 주제**: 
+  분기별 이커머스 매출 및 수익성 분석 대시보드
+* **데이터 설명 (Data Description)**:
+  1. `order_id` (String) - 주문 번호
+  2. `order_date` (Date) - 주문 일자
+  3. `category` (String) - 상품 카테고리
+  4. `product_name` (String) - 제품명
+  5. `sales_amount` (Number) - 판매가
+  6. `quantity` (Number) - 수량
+  7. `discount_rate` (Number) - 할인율
+  8. `customer_id` (String) - 고객 ID
+  9. `gender` (String) - 성별
+  10. `region` (String) - 배송지(시/도)
+  11. `marketing_channel` (String) - 마케팅 유입 경로 (SNS, 검색, 다이렉트 등)
+
+### 2. 분석 목표 (Goal Tags)
+* **목표 선택**: KPI Tracking, Trend Analysis
+* **사용자 정의 목표 (Add Custom)**: 
+  - 비교 분석 (카테고리별 매출 비교 및 수익성 진단)
+
+### 3. 분석 복잡도 (Complexity)
+* **슬라이더 설정**: 3 (Standard)
+
+### 4. 추가 요구사항 입력 (선택)
+* **주요 대상 (보고 받는 사람)**: 경영진 / C-Level
+* **주요 확인 지표 (Key Metrics)**: 기타 (AI가 데이터 기반으로 추천)
+* **추가 요구사항 / 참고사항**:
+  - 경영진이 한눈에 핵심 성과를 볼 수 있도록 상단에 BANs(Big Ass Numbers)를 배치해 주세요.
+  - 전년 동기 대비 증감률(YoY)을 강조해 주세요.
+
+---
+
+## 샘플 2: HR(인사) 직원 이직률 분석 대시보드 (이미지 기반)
+### 1. 대시보드 정보 입력
+* **대시보드 주제**: 
+  연도별 부서별 직원 퇴사율 및 요인 분석
+* **데이터 설명 (Data Description)**:
+  1. `employee ID` (String) - 사번
+  2. `enter date` (Date) - 입사일
+  3. `out date` (Date) - 퇴사일
+  4. `working years` (Number) - 근속 연수
+  5. `department` (String) - 소속 부서
+  6. `level` (String) - 직급
+  7. `HR grade` (String) - 최근 인사평가 등급
+  8. `salary rate` (Number) - 연봉 인상률
+  9. `overwork time` (Number) - 초과 근무 시간
+  10. `quit reason` (String) - 퇴사 사유(인터뷰 기반 텍스트 데이터)
+
+### 2. 분석 목표 (Goal Tags)
+* **목표 선택**: Monitoring, Data Mining
+* **사용자 정의 목표 (Add Custom)**: 
+  - 문제점 탐색(특정 부서의 비정상적인 퇴사율 급증) - 원인 파악(퇴사율과 초과 근무 시간의 상관관계)
+
+### 3. 분석 복잡도 (Complexity)
+* **슬라이더 설정**: 4 (Standard와 Advanced 사이)
+
+### 4. 추가 요구사항 입력 (선택)
+* **주요 대상 (보고 받는 사람)**: 경영진 / C-Level
+* **주요 확인 지표 (Key Metrics)**: 기타 (AI가 데이터 기반으로 추천)
+* **추가 요구사항 / 참고사항**:
+  - 심리적으로 안정감을 주는 차분한 블루/그레이 계열의 색상을 제안해 주세요.
+  - 근속 연수별 이직률을 직관적으로 볼 수 있는 분포표가 있으면 좋겠습니다.
+
+---
+
+## 샘플 3: 물류/재고 관리 모니터링 대시보드
+### 1. 대시보드 정보 입력
+* **대시보드 주제**: 
+  실시간 물류 창고 재고 현황 및 품절 위험도 모니터링
+* **데이터 설명 (Data Description)**:
+  1. `warehouse_loc` (String) - 창고 위치
+  2. `sku_code` (String) - SKU(품목 코드)
+  3. `current_stock` (Number) - 실시간 현재 재고량
+  4. `avg_daily_out` (Number) - 일평균 출고량
+  5. `safety_stock` (Number) - 안전 재고 기준선
+  6. `lead_time_days` (Number) - 재입고 리드타임(소요 시간)
+
+### 2. 분석 목표 (Goal Tags)
+* **목표 선택**: Monitoring, Forecasting
+* **사용자 정의 목표 (Add Custom)**: 
+  - 이상치 감지 (안전 재고 미달 품목 알람 및 발주 시점 예측)
+
+### 3. 분석 복잡도 (Complexity)
+* **슬라이더 설정**: 2 (Simple과 Standard 사이)
+
+### 4. 추가 요구사항 입력 (선택)
+* **주요 대상 (보고 받는 사람)**: 물류 관리자 / 실무진
+* **주요 확인 지표 (Key Metrics)**: 기타 (AI가 데이터 기반으로 추천)
+* **추가 요구사항 / 참고사항**:
+  - 위험/경고 상태를 명확히 알 수 있도록 신호등 색상(빨강, 노랑, 초록)을 활용한 시각화를 추천해 주세요.
+  - 당장 발주가 필요한 품목 리스트를 테이블 형태로 볼 수 있게 해주세요.

@@ -1,0 +1,236 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.dash{background:#f4f3f7;padding:16px;border-radius:var(--border-radius-lg);width:100%}
+.header{background:#1A365D;border-radius:var(--border-radius-md);padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.header h1{color:#fff;font-size:14px;font-weight:500;flex:1;min-width:160px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap}
+.filter-pill{background:rgba(255,255,255,0.15);border:0.5px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 10px;font-size:11px;color:#fff;display:flex;align-items:center;gap:4px}
+.filter-pill i{font-size:12px}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi-card{background:#fff;border-radius:var(--border-radius-md);padding:12px 14px;border:0.5px solid #e2e0e8}
+.kpi-label{font-size:11px;color:#6b6878;margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.kpi-label i{font-size:13px}
+.kpi-value{font-size:22px;font-weight:500;color:#1A365D}
+.kpi-change{font-size:11px;margin-top:2px}
+.kpi-change.up{color:#BA1A1A}
+.kpi-change.down{color:#1D9E75}
+.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.chart-card{background:#fff;border-radius:var(--border-radius-md);padding:14px;border:0.5px solid #e2e0e8}
+.chart-card.full{grid-column:1/3}
+.card-title{font-size:12px;font-weight:500;color:#1A365D;margin-bottom:4px}
+.card-sub{font-size:10px;color:#8c8aa0;margin-bottom:10px}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.badge-blue{background:#E6F1FB;color:#0C447C}
+.badge-red{background:#FCEBEB;color:#791F1F}
+.badge-amber{background:#FAEEDA;color:#633806}
+</style>
+
+<div class="dash">
+
+<div class="header">
+  <h1><i class="ti ti-chart-bar" aria-hidden="true" style="font-size:16px;vertical-align:-2px;margin-right:4px"></i>HR Attrition Analytics Dashboard</h1>
+  <div class="filter-row">
+    <div class="filter-pill"><i class="ti ti-calendar" aria-hidden="true"></i>Year: 2024</div>
+    <div class="filter-pill"><i class="ti ti-building" aria-hidden="true"></i>Department: All</div>
+    <div class="filter-pill"><i class="ti ti-user" aria-hidden="true"></i>Level: All</div>
+    <div class="filter-pill"><i class="ti ti-star" aria-hidden="true"></i>HR Grade: All</div>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-label"><i class="ti ti-logout" aria-hidden="true"></i>Total Turnover Rate</div>
+    <div class="kpi-value">18.4%</div>
+    <div class="kpi-change up">▲ 2.1% vs last year</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label"><i class="ti ti-clock" aria-hidden="true"></i>Avg. Working Years</div>
+    <div class="kpi-value">3.2 yrs</div>
+    <div class="kpi-change down">▼ 0.4 yrs vs last year</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label"><i class="ti ti-alarm" aria-hidden="true"></i>Avg. Overwork Time</div>
+    <div class="kpi-value">47.6 hrs</div>
+    <div class="kpi-change up">▲ 3.2 hrs vs last year</div>
+  </div>
+</div>
+
+<div class="main-grid">
+  <div class="chart-card">
+    <div class="card-title">Annual Turnover Rate by Department</div>
+    <div class="card-sub">Dual Axis · Bar = Headcount · Line = Turnover Rate</div>
+    <div style="display:flex;gap:12px;margin-bottom:8px">
+      <span class="badge badge-blue">● Headcount</span>
+      <span class="badge badge-red">— Turnover %</span>
+    </div>
+    <div style="position:relative;width:100%;height:190px">
+      <canvas id="deptChart" role="img" aria-label="Bar and line chart showing annual turnover rate by department">Engineering 22%, Sales 28%, HR 14%, Finance 11%, Marketing 19%</canvas>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title">Attrition Rate by Working Years</div>
+    <div class="card-sub">Distribution Plot · Risk peaks at 1–3 yrs</div>
+    <div style="position:relative;width:100%;height:210px">
+      <canvas id="distChart" role="img" aria-label="Distribution chart showing attrition rate by working years, with highest rate in years 1-3">Year 1: 34%, Year 2: 28%, Year 3: 19%, Year 4: 12%, Year 5+: 7%</canvas>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-grid">
+  <div class="chart-card">
+    <div class="card-title">Overwork Time vs. Turnover Rate</div>
+    <div class="card-sub">Heatmap · Blue = low · Red = high turnover</div>
+    <div id="heatmap" style="margin-top:4px"></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-top:8px">
+      <span style="font-size:10px;color:#8c8aa0">Low</span>
+      <div style="display:flex;gap:2px">
+        <div style="width:18px;height:10px;background:#B5D4F4;border-radius:2px"></div>
+        <div style="width:18px;height:10px;background:#85B7EB;border-radius:2px"></div>
+        <div style="width:18px;height:10px;background:#378ADD;border-radius:2px"></div>
+        <div style="width:18px;height:10px;background:#E24B4A;border-radius:2px"></div>
+        <div style="width:18px;height:10px;background:#A32D2D;border-radius:2px"></div>
+      </div>
+      <span style="font-size:10px;color:#8c8aa0">High</span>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title">Top Quit Reasons</div>
+    <div class="card-sub">Bar Chart · Most cited exit survey responses</div>
+    <div style="position:relative;width:100%;height:190px">
+      <canvas id="reasonChart" role="img" aria-label="Horizontal bar chart of top quit reasons: Low compensation 38%, Work-life balance 31%, No growth opportunity 22%, Management issues 17%, Better offer 14%">Low compensation 38%, Work-life balance 31%, No growth 22%, Management 17%, Better offer 14%</canvas>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const depts = ['Engineering','Sales','HR','Finance','Marketing'];
+const headcount = [142, 98, 34, 67, 55];
+const turnover = [22, 28, 14, 11, 19];
+
+new Chart(document.getElementById('deptChart'), {
+  type: 'bar',
+  data: {
+    labels: depts,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Headcount',
+        data: headcount,
+        backgroundColor: '#B5D4F4',
+        borderColor: '#378ADD',
+        borderWidth: 0.5,
+        yAxisID: 'y',
+        borderRadius: 3
+      },
+      {
+        type: 'line',
+        label: 'Turnover %',
+        data: turnover,
+        borderColor: '#BA1A1A',
+        backgroundColor: 'rgba(186,26,26,0.08)',
+        borderWidth: 2,
+        pointBackgroundColor: '#BA1A1A',
+        pointRadius: 4,
+        tension: 0.3,
+        yAxisID: 'y2',
+        fill: true
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { position: 'left', grid: { color: '#f0eff5' }, ticks: { font: { size: 10 }, color: '#6b6878' } },
+      y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, color: '#BA1A1A', callback: v => v + '%' } },
+      x: { grid: { display: false }, ticks: { font: { size: 9 }, color: '#6b6878', maxRotation: 20 } }
+    }
+  }
+});
+
+new Chart(document.getElementById('distChart'), {
+  type: 'bar',
+  data: {
+    labels: ['< 1 yr', '1–2 yrs', '2–3 yrs', '3–5 yrs', '5–8 yrs', '8+ yrs'],
+    datasets: [{
+      data: [38, 34, 28, 19, 12, 7],
+      backgroundColor: ['#0C447C','#185FA5','#378ADD','#85B7EB','#B5D4F4','#E6F1FB'],
+      borderRadius: 4,
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: '#f0eff5' }, ticks: { font: { size: 10 }, color: '#6b6878', callback: v => v + '%' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#6b6878' } }
+    }
+  }
+});
+
+const heatEl = document.getElementById('heatmap');
+const rows = ['>60h','50-60h','40-50h','<40h'];
+const cols = ['<1yr','1-3yr','3-5yr','5-10yr','10yr+'];
+const vals = [
+  [42,38,31,22,14],
+  [31,27,21,15,9],
+  [22,19,14,10,6],
+  [14,11,8,5,3]
+];
+const colorScale = ['#E6F1FB','#85B7EB','#378ADD','#E24B4A','#A32D2D'];
+function getColor(v) {
+  if(v<10) return colorScale[0];
+  if(v<18) return colorScale[1];
+  if(v<25) return colorScale[2];
+  if(v<35) return colorScale[3];
+  return colorScale[4];
+}
+let html = '<table style="width:100%;border-collapse:collapse;font-size:10px">';
+html += '<tr><td style="color:#8c8aa0;padding:2px 4px"></td>' + cols.map(c=>`<td style="text-align:center;color:#8c8aa0;padding:2px 4px;font-size:9px">${c}</td>`).join('') + '</tr>';
+rows.forEach((r,i)=>{
+  html += `<tr><td style="color:#8c8aa0;padding:3px 4px;white-space:nowrap">${r}</td>`;
+  vals[i].forEach(v=>{
+    const bg = getColor(v);
+    const tc = v>=25 ? '#fff' : '#0C447C';
+    html += `<td style="text-align:center;background:${bg};color:${tc};border-radius:4px;padding:5px 2px;font-weight:500">${v}%</td>`;
+  });
+  html += '</tr>';
+});
+html += '</table>';
+heatEl.innerHTML = html;
+
+new Chart(document.getElementById('reasonChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Low compensation','Work-life balance','No growth path','Mgmt. issues','Better offer'],
+    datasets: [{
+      data: [38,31,22,17,14],
+      backgroundColor: ['#1A365D','#185FA5','#378ADD','#85B7EB','#B5D4F4'],
+      borderRadius: 4,
+      borderWidth: 0,
+      indexAxis: 'y'
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: '#f0eff5' }, ticks: { font: { size: 10 }, color: '#6b6878', callback: v => v + '%' } },
+      y: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#2C2C2A' } }
+    }
+  }
+});
+</script>

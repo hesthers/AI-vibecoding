@@ -1,0 +1,238 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.dash{background:#f4f3f7;padding:14px;border-radius:12px;width:100%;font-family:var(--font-sans)}
+.header{background:#1A365D;border-radius:8px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-title{color:#fff;font-size:13px;font-weight:500;flex:1;min-width:140px}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap}
+.fpill{background:rgba(255,255,255,0.15);border:0.5px solid rgba(255,255,255,0.3);border-radius:20px;padding:3px 10px;font-size:11px;color:#fff;display:flex;align-items:center;gap:4px}
+.fpill i{font-size:12px}
+.top-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.kpi{background:#fff;border-radius:8px;padding:11px 13px;border:0.5px solid #e2e0e8}
+.kpi-lbl{font-size:10px;color:#6b6878;margin-bottom:3px;display:flex;align-items:center;gap:3px}
+.kpi-lbl i{font-size:12px}
+.kpi-val{font-size:20px;font-weight:500;color:#1A365D}
+.kpi-chg{font-size:10px;margin-top:2px}
+.green{color:#43A047} .red{color:#E53935} .amber{color:#FBC02D}
+.main-row{display:grid;grid-template-columns:1fr 200px;gap:10px;margin-bottom:12px}
+.card{background:#fff;border-radius:8px;padding:13px;border:0.5px solid #e2e0e8}
+.card-title{font-size:12px;font-weight:500;color:#1A365D;margin-bottom:2px}
+.card-sub{font-size:10px;color:#8c8aa0;margin-bottom:10px}
+.mini-kpis{display:flex;flex-direction:column;gap:9px}
+.mini-kpi{background:#f4f3f7;border-radius:7px;padding:10px 12px}
+.mini-lbl{font-size:10px;color:#6b6878;margin-bottom:2px;display:flex;align-items:center;gap:3px}
+.mini-val{font-size:17px;font-weight:500;color:#1A365D}
+.mini-sub{font-size:10px;color:#8c8aa0;margin-top:1px}
+.tbl-card{background:#fff;border-radius:8px;padding:13px;border:0.5px solid #e2e0e8}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{text-align:left;color:#8c8aa0;font-weight:500;padding:5px 8px;border-bottom:0.5px solid #e2e0e8}
+td{padding:6px 8px;border-bottom:0.5px solid #f0eff5;color:var(--color-text-primary)}
+tr:last-child td{border-bottom:none}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.dot-r{background:#E53935} .dot-y{background:#FBC02D} .dot-g{background:#43A047}
+.status-r{background:#FCEBEB;color:#791F1F;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:500;white-space:nowrap}
+.status-y{background:#FAEEDA;color:#633806;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:500;white-space:nowrap}
+.status-g{background:#EAF3DE;color:#27500A;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:500;white-space:nowrap}
+.legend{display:flex;gap:12px;margin-bottom:8px}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#6b6878}
+</style>
+
+<div class="dash">
+
+<div class="header">
+  <div class="header-title"><i class="ti ti-package" aria-hidden="true" style="font-size:15px;vertical-align:-2px;margin-right:4px"></i>Inventory & Logistics Monitor</div>
+  <div class="filter-row">
+    <div class="fpill"><i class="ti ti-map-pin" aria-hidden="true"></i>Warehouse: All</div>
+    <div class="fpill"><i class="ti ti-barcode" aria-hidden="true"></i>SKU: All</div>
+    <div class="fpill"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>Safety Threshold: 200</div>
+  </div>
+</div>
+
+<div class="top-row">
+  <div class="kpi">
+    <div class="kpi-lbl"><i class="ti ti-refresh" aria-hidden="true"></i>Inventory Turnover</div>
+    <div class="kpi-val">6.4×</div>
+    <div class="kpi-chg green">▲ 0.8× vs last month</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-lbl"><i class="ti ti-alert-triangle" aria-hidden="true"></i>Critical SKUs</div>
+    <div class="kpi-val red">3</div>
+    <div class="kpi-chg red">▲ 1 vs last week</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-lbl"><i class="ti ti-arrow-up-right" aria-hidden="true"></i>Avg. Daily Outflow</div>
+    <div class="kpi-val">142 units</div>
+    <div class="kpi-chg amber">▲ 5.2% vs last week</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-lbl"><i class="ti ti-clock" aria-hidden="true"></i>Avg. Lead Time</div>
+    <div class="kpi-val">4.7 days</div>
+    <div class="kpi-chg green">▼ 0.3 days vs last mo.</div>
+  </div>
+</div>
+
+<div class="main-row">
+  <div class="card">
+    <div class="card-title">Stock vs Safety Level by SKU</div>
+    <div class="card-sub">Bar = Current Stock · Line = Safety Stock threshold · Color = Risk status</div>
+    <div class="legend">
+      <div class="leg-item"><span class="dot dot-r"></span>Critical (below safety)</div>
+      <div class="leg-item"><span class="dot dot-y"></span>Warning (≤120%)</div>
+      <div class="leg-item"><span class="dot dot-g"></span>Normal</div>
+    </div>
+    <div style="position:relative;width:100%;height:195px">
+      <canvas id="stockChart" role="img" aria-label="Bar chart comparing current stock vs safety stock per SKU with color coding">SKU-A01 120 vs 200 critical, SKU-B03 180 vs 200 warning, SKU-C07 95 vs 200 critical, SKU-D12 450 vs 200 normal, SKU-E05 160 vs 200 warning, SKU-F09 620 vs 200 normal, SKU-G02 230 vs 200 normal, SKU-H11 85 vs 200 critical</canvas>
+    </div>
+  </div>
+
+  <div class="mini-kpis">
+    <div class="mini-kpi">
+      <div class="mini-lbl"><i class="ti ti-trending-up" aria-hidden="true"></i>Total SKUs tracked</div>
+      <div class="mini-val">48</div>
+      <div class="mini-sub">across 3 warehouses</div>
+    </div>
+    <div class="mini-kpi">
+      <div class="mini-lbl"><i class="ti ti-truck" aria-hidden="true"></i>Pending Reorders</div>
+      <div class="mini-val" style="color:#E53935">7</div>
+      <div class="mini-sub">est. arrival: 3–6 days</div>
+    </div>
+    <div class="mini-kpi">
+      <div class="mini-lbl"><i class="ti ti-building-warehouse" aria-hidden="true"></i>Warehouses</div>
+      <div class="mini-val">3</div>
+      <div class="mini-sub">Seoul · Incheon · Busan</div>
+    </div>
+    <div class="mini-kpi">
+      <div class="mini-lbl"><i class="ti ti-rotate" aria-hidden="true"></i>Last updated</div>
+      <div class="mini-val" style="font-size:13px;margin-top:2px">12:47 PM</div>
+      <div class="mini-sub">auto-refresh: 1hr</div>
+    </div>
+  </div>
+</div>
+
+<div class="tbl-card">
+  <div class="card-title" style="margin-bottom:2px">Reorder Alert Table</div>
+  <div class="card-sub" style="margin-bottom:10px">SKUs requiring immediate action — sorted by criticality</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>SKU Code</th>
+        <th>Warehouse</th>
+        <th>Current Stock</th>
+        <th>Safety Stock</th>
+        <th>Gap</th>
+        <th>Lead Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="status-r">● Critical</span></td>
+        <td style="font-weight:500">SKU-C07</td>
+        <td>Seoul</td>
+        <td style="color:#E53935;font-weight:500">95</td>
+        <td>200</td>
+        <td style="color:#E53935">-105</td>
+        <td>5 days</td>
+        <td><span style="background:#1A365D;color:#fff;border-radius:6px;padding:2px 8px;font-size:10px;cursor:pointer">Reorder</span></td>
+      </tr>
+      <tr>
+        <td><span class="status-r">● Critical</span></td>
+        <td style="font-weight:500">SKU-H11</td>
+        <td>Busan</td>
+        <td style="color:#E53935;font-weight:500">85</td>
+        <td>200</td>
+        <td style="color:#E53935">-115</td>
+        <td>7 days</td>
+        <td><span style="background:#1A365D;color:#fff;border-radius:6px;padding:2px 8px;font-size:10px;cursor:pointer">Reorder</span></td>
+      </tr>
+      <tr>
+        <td><span class="status-r">● Critical</span></td>
+        <td style="font-weight:500">SKU-A01</td>
+        <td>Incheon</td>
+        <td style="color:#E53935;font-weight:500">120</td>
+        <td>200</td>
+        <td style="color:#E53935">-80</td>
+        <td>4 days</td>
+        <td><span style="background:#1A365D;color:#fff;border-radius:6px;padding:2px 8px;font-size:10px;cursor:pointer">Reorder</span></td>
+      </tr>
+      <tr>
+        <td><span class="status-y">● Warning</span></td>
+        <td style="font-weight:500">SKU-B03</td>
+        <td>Seoul</td>
+        <td style="color:#FBC02D;font-weight:500">180</td>
+        <td>200</td>
+        <td style="color:#FBC02D">-20</td>
+        <td>3 days</td>
+        <td><span style="background:#f4f3f7;color:#1A365D;border:0.5px solid #e2e0e8;border-radius:6px;padding:2px 8px;font-size:10px;cursor:pointer">Monitor</span></td>
+      </tr>
+      <tr>
+        <td><span class="status-y">● Warning</span></td>
+        <td style="font-weight:500">SKU-E05</td>
+        <td>Busan</td>
+        <td style="color:#FBC02D;font-weight:500">160</td>
+        <td>200</td>
+        <td style="color:#FBC02D">-40</td>
+        <td>6 days</td>
+        <td><span style="background:#f4f3f7;color:#1A365D;border:0.5px solid #e2e0e8;border-radius:6px;padding:2px 8px;font-size:10px;cursor:pointer">Monitor</span></td>
+      </tr>
+      <tr>
+        <td><span class="status-g">● Normal</span></td>
+        <td style="font-weight:500">SKU-D12</td>
+        <td>Seoul</td>
+        <td style="color:#43A047;font-weight:500">450</td>
+        <td>200</td>
+        <td style="color:#43A047">+250</td>
+        <td>4 days</td>
+        <td><span style="background:#f4f3f7;color:#6b6878;border:0.5px solid #e2e0e8;border-radius:6px;padding:2px 8px;font-size:10px">OK</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const skus = ['SKU-A01','SKU-B03','SKU-C07','SKU-D12','SKU-E05','SKU-F09','SKU-G02','SKU-H11'];
+const stock = [120,180,95,450,160,620,230,85];
+const safety = 200;
+const colors = stock.map(v => v < safety ? '#E53935' : v < safety*1.2 ? '#FBC02D' : '#43A047');
+
+new Chart(document.getElementById('stockChart'),{
+  type:'bar',
+  data:{
+    labels:skus,
+    datasets:[
+      {
+        label:'Current Stock',
+        data:stock,
+        backgroundColor:colors,
+        borderRadius:4,
+        borderWidth:0,
+        order:2
+      },
+      {
+        label:'Safety Stock',
+        data:Array(8).fill(safety),
+        type:'line',
+        borderColor:'#1A365D',
+        borderWidth:1.5,
+        borderDash:[5,4],
+        pointRadius:0,
+        fill:false,
+        order:1
+      }
+    ]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{grid:{color:'#f0eff5'},ticks:{font:{size:10},color:'#6b6878'},min:0,max:700},
+      x:{grid:{display:false},ticks:{font:{size:9},color:'#2C2C2A',maxRotation:25}}
+    }
+  }
+});
+</script>
